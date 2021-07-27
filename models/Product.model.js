@@ -11,9 +11,13 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    typeNumberId: {
+    price: {
+      type: String,
+      required: true,
+    },
+    categoryId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "TypeNumber",
+      ref: "Category",
     },
   },
   { timestamps: true }
