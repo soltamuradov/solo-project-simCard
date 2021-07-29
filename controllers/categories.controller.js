@@ -1,4 +1,4 @@
-const Category = require("../models/Category.model");
+const Category = require('../models/Category.model');
 
 module.exports.categoriesController = {
   getAllCategories: async (req, res) => {
@@ -16,7 +16,7 @@ module.exports.categoriesController = {
 
     if (!name) {
       return res.status(400).json({
-        error: "Укажите тип номера",
+        error: 'Укажите тип номера',
       });
     }
     try {
@@ -38,11 +38,11 @@ module.exports.categoriesController = {
       const category = await Category.findByIdAndRemove(id);
       if (!category) {
         return res.status(400).json({
-          error: "Не удалось удалить категорию",
+          error: 'Не удалось удалить категорию',
         });
       }
       return res.status(400).json({
-        message: "Тип удален",
+        message: 'Тип удален',
       });
     } catch (e) {}
   },
@@ -53,7 +53,7 @@ module.exports.categoriesController = {
 
     if (!name) {
       return res.status(400).json({
-        error: "Укажите тип номера",
+        error: 'Укажите тип номера',
       });
     }
 
@@ -65,7 +65,7 @@ module.exports.categoriesController = {
       );
       if (!category) {
         return res.status(400).json({
-          error: "Не удалось изменить тип номера",
+          error: 'Не удалось изменить тип номера',
         });
       }
       return res.json(category);

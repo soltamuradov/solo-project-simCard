@@ -1,9 +1,12 @@
-const Product = require("../models/Product.model");
+const Product = require('../models/Product.model');
+const Category = require('../models/Category.model');
 
 module.exports.productsController = {
   getAllProducts: async (req, res) => {
     try {
-      const products = await Product.find();
+      const products = await Product.find()
+        .sort({ createdAt: -1 })
+        .populate('categoryId');
       return res.json(products);
     } catch (e) {
       return res.status(400).json({
@@ -11,30 +14,53 @@ module.exports.productsController = {
       });
     }
   },
+
+  getProductsByCategoryId: async (req, res) => {
+    const { id } = req.params;
+    try {
+      const productsByCategory = await Product.find({
+        categoryId: id,
+      })
+        .sort({ createdAt: -1 })
+        .populate('categoryId');
+
+      return res.json(productsByCategory);
+    } catch (e) {
+      return res.status(400).json({
+        error: e.toString(),
+      });
+    }
+  },
+
   addProduct: async (req, res) => {
-    const { price, name, number, categoryId } = req.body;
+    const { name, number, price, categoryId } = req.body;
     if (!name) {
       return res.status(400).json({
-        error: "Укажите название сим-карты",
+        error: 'Укажите название сим-карты',
       });
     }
     if (!number) {
       return res.status(400).json({
-        error: "Укажите номер карты",
+        error: 'Укажите номер карты',
       });
     }
     if (!price || price < 0) {
       return res.status(400).json({
-        error: "Укажите цену сим-карты",
+        error: 'Укажите цену сим-карты',
       });
     }
+
     try {
-      const product = await Product.create({
+      const createdProduct = await Product.create({
         name,
         number,
         price,
         categoryId,
       });
+
+      const product = await Product.findById(createdProduct._id).populate(
+        'categoryId'
+      );
 
       return res.json(product);
     } catch (e) {
@@ -51,11 +77,11 @@ module.exports.productsController = {
       const product = await Product.findByIdAndRemove(id);
       if (!product) {
         return res.status(400).json({
-          error: "Не удалось удалить сим-карту",
+          error: 'Не удалось удалить сим-карту',
         });
       }
       return res.json({
-        message: "Сим-карта удалена",
+        message: 'Сим-карта удалена',
       });
     } catch (e) {
       return res.status(400).json({
@@ -70,17 +96,17 @@ module.exports.productsController = {
 
     if (!name) {
       return res.status(400).json({
-        error: "Укажите название сим-карты",
+        error: 'Укажите название сим-карты',
       });
     }
     if (!number) {
       return res.status(400).json({
-        error: "Укажите номер сим-карты",
+        error: 'Укажите номер сим-карты',
       });
     }
     if (!price || price < 0) {
       return res.status(400).json({
-        error: "Укажите цену сим-карты",
+        error: 'Укажите цену сим-карты',
       });
     }
 
@@ -92,7 +118,7 @@ module.exports.productsController = {
       );
       if (!product) {
         return res.status(400).json({
-          error: "Не удалось изменить данные",
+          error: 'Не удалось изменить данные',
         });
       }
       return res.json(product);

@@ -4,14 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js -q"
-  },
-  "eslintConfig": {
-    "extends": ["airbnb", "prettier"],
-    "rules": {
-      "no-console": "off",
-      "no-unused-vars": "warn"
-    }
+    "server": "nodemon index",
+    "client": "cd ./client && npm start",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "node index.js"
   },
   "prettier": {
     "singleQuote": true
@@ -20,14 +16,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^7.31.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.23.4",
     "nodemon": "^2.0.12",
     "prettier": "^2.3.2"
   },
   "dependencies": {
+    "concurrently": "^6.2.0",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
