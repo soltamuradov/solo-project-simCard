@@ -3,8 +3,15 @@ const Cart = require('../models/Cart.model');
 module.exports.cartController = {
   getCart: async (req, res) => {
     try {
-      const cart = await Cart.find();
-      return res.json(Cart);
+      const cart = await Cart.find().populate({
+        path: 'productsItems',
+        model: 'Cart',
+        populate: {
+          path: 'product',
+          model: 'Product',
+        },
+      });
+      return res.json(cart);
     } catch (e) {
       return res.status(400).json({
         error: e.toString(),
@@ -28,19 +35,17 @@ module.exports.cartController = {
   },
 
   addProductInCart: async (req, res) => {
-    const cart = await Cart.findById(req.params.id);
-    const productId = req.body.productId;
+    const { id } = req.params;
+    const data = req.body;
+
     try {
-      const product = {
-        productId: productId,
-      };
-      cart.productItems.push(product);
-      cart.save();
-      return res.json('Продукт добавлен в корзину');
+      const cart = await Cart.updateOne(
+        { _id: id },
+        { $addToSet: { productsItems: data } }
+      );
+      return res.json(cart);
     } catch (e) {
-      return res.status(400).json({
-        error: e.toString(),
-      });
+      console.log(e.message);
     }
   },
 
