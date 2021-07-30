@@ -12,11 +12,7 @@ const useStyle = makeStyles({
 });
 function Cart() {
   const classes = useStyle();
-  return (
-    <Box className={classes.cartBox}>
-      <ShoppingCartIcon lassName={classes.cart} />
-    </Box>
-  );
+  return <Box className={classes.cartBox}></Box>;
 }
 
 export default Cart;

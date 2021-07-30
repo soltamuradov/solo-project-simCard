@@ -3,6 +3,7 @@ const initialState = {
   deliting: false,
   editing: false,
   items: [],
+  editingCategory: {},
 };
 
 const categories = (state = initialState, action) => {
@@ -38,9 +39,22 @@ const categories = (state = initialState, action) => {
           return category;
         }),
       };
+
+    case 'categories/set-editing-category':
+      return {
+        ...state,
+        editingCategory: action.payload,
+      };
     default:
       return state;
   }
+};
+
+export const setEditingCategory = (category) => {
+  return {
+    type: 'categories/set-editing-category',
+    payload: category,
+  };
 };
 
 export const allCategories = () => {

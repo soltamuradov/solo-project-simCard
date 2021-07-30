@@ -1,7 +1,15 @@
 import React from 'react';
-import { Button, makeStyles, TableCell, TableRow } from '@material-ui/core';
+import {
+  Button,
+  makeStyles,
+  Table,
+  TableCell,
+  TableContainer,
+  TableRow,
+} from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import SubMenu from '../SubMenu';
+import Cart from '../header/Cart';
 
 const useStyles = makeStyles({
   numberString: {},

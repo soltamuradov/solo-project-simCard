@@ -1,5 +1,11 @@
 import React from 'react';
-import { Button, TableCell, TableRow } from '@material-ui/core';
+import {
+  Button,
+  Table,
+  TableCell,
+  TableContainer,
+  TableRow,
+} from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import SubMenu from '../SubMenu';
 import { deleteProducts } from '../../redux/features/products';

@@ -14,14 +14,16 @@ function App() {
   useEffect(() => dispatch(allCategories()), [dispatch]);
 
   return (
-    <Container maxWidth="xl">
-      <Header />
-      <TableContainer>
-        <Table>
-          <Routes />
-        </Table>
-      </TableContainer>
-    </Container>
+    <>
+      <Container className="container" maxWidth="xl">
+        <Header />
+        <TableContainer>
+          <Table>
+            <Routes />
+          </Table>
+        </TableContainer>
+      </Container>
+    </>
   );
 }
 

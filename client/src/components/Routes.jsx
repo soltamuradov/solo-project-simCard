@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import AdminPanelNumbers from './pages/AdminPanelNumbers';
 import AdminPanelCategories from './pages/AdminPanelCategories';
+import Cart from './header/Cart';
 
 function Routes() {
   return (
@@ -19,6 +20,10 @@ function Routes() {
       </Route>
       <Route path="/about">
         <About />
+      </Route>
+
+      <Route path="/cart">
+        <Cart />
       </Route>
       <Redirect to="/home" />
     </Switch>

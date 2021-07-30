@@ -10,13 +10,15 @@ import {
   Select,
 } from '@material-ui/core';
 import '../../styles.css';
+import Cart from './Cart';
 
 const useStyle = makeStyles({
   navBar: {
     width: 400,
     display: 'flex',
     justifyContent: 'space-between',
-    marginLeft: 60,
+    marginLeft: 200,
+
     fontWeight: 'bold',
     fontSize: 25,
     fontFamily: 'Roboto',
@@ -43,44 +45,51 @@ function MenuNav() {
   };
 
   return (
-    <Box className={classes.navBar}>
-      <NavLink className="link" to="/home">
-        Главная
-      </NavLink>
+    <>
+      <Box className={classes.navBar}>
+        <NavLink className="link" to="/home">
+          Главная
+        </NavLink>
 
-      <Box>
-        <Button
-          classes={{ root: classes.adminButton }}
-          aria-controls="simple-menu"
-          aria-haspopup="true"
-          onClick={handleClick}
-        >
-          Админка
-        </Button>
-        <Menu
-          id="simple-menu"
-          anchorEl={anchorEl}
-          keepMounted
-          open={Boolean(anchorEl)}
-          onClose={handleClose}
-        >
-          <MenuItem onClick={handleClose}>
-            <NavLink className="link_admin" to="/numbers">
-              Номера
-            </NavLink>
-          </MenuItem>
-          <MenuItem onClick={handleClose}>
-            <NavLink className="link_admin" to="/categories">
-              Категории
-            </NavLink>
-          </MenuItem>
-        </Menu>
+        <Box>
+          <Button
+            classes={{ root: classes.adminButton }}
+            aria-controls="simple-menu"
+            aria-haspopup="true"
+            onClick={handleClick}
+          >
+            Админка
+          </Button>
+          <Menu
+            id="simple-menu"
+            anchorEl={anchorEl}
+            keepMounted
+            open={Boolean(anchorEl)}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={handleClose}>
+              <NavLink className="link_admin" to="/numbers">
+                Номера
+              </NavLink>
+            </MenuItem>
+            <MenuItem onClick={handleClose}>
+              <NavLink className="link_admin" to="/categories">
+                Категории
+              </NavLink>
+            </MenuItem>
+          </Menu>
+        </Box>
+
+        <NavLink className="link" to="/about">
+          О нас
+        </NavLink>
       </Box>
-
-      <NavLink className="link" to="/about">
-        О нас
-      </NavLink>
-    </Box>
+      <Box className="cart_item">
+        <NavLink className="link" to="/cart">
+          Корзина
+        </NavLink>
+      </Box>
+    </>
   );
 }
 

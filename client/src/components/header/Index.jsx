@@ -9,7 +9,6 @@ import MenuNav from './MenuNav';
 const useStyle = makeStyles({
   header: {
     display: 'flex',
-    justifyContent: 'space-between',
     height: 50,
     paddingTop: 15,
     backgroundColor: '#1976d2',
@@ -24,7 +23,6 @@ function Index() {
       <Box className={classes.header}>
         <Logo />
         <MenuNav />
-        <Cart />
       </Box>
     </>
   );

@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
   makeStyles,
+  Table,
   TableCell,
+  TableContainer,
   TableRow,
-  TextField,
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import AddCategory from '../AddCategory';
-import { editCategory } from '../../redux/features/categories';
+import { setEditingCategory } from '../../redux/features/categories';
+import EditCategoryDialog from '../EditCategoryDialog';
 
 const useStyles = makeStyles({
   subMenu: {
@@ -23,22 +21,13 @@ const useStyles = makeStyles({
 function AdminPanelCategories() {
   const categories = useSelector((state) => state.categories.items);
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-  const [name, setNameCategory] = useState('');
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (category) => {
+    dispatch(setEditingCategory(category));
+
     setOpen(true);
-  };
-
-  const handleClose = (id) => {
-    dispatch(editCategory(id, { name }));
-    console.log(id);
-    setOpen(false);
-  };
-
-  const handleEditNameCategory = (e) => {
-    setNameCategory(e.target.value);
   };
 
   return (
@@ -46,7 +35,6 @@ function AdminPanelCategories() {
       <TableRow className={classes.subMenu}>
         <TableCell> </TableCell>
         <TableCell>Тип категории</TableCell>
-        <TableCell>ИД категории</TableCell>
         <TableCell> </TableCell>
         <TableCell> </TableCell>
       </TableRow>
@@ -56,49 +44,20 @@ function AdminPanelCategories() {
           <TableRow>
             <TableCell> </TableCell>
             <TableCell>{category.name}</TableCell>
-            <TableCell>{category._id}</TableCell>
             <TableCell>
               <Button
                 variant="outlined"
                 color="primary"
-                onClick={handleClickOpen}
+                onClick={() => handleClickOpen(category)}
               >
                 Изменить
               </Button>
-              <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="form-dialog-title"
-              >
-                <DialogTitle id="form-dialog-title">
-                  Введите новую категорию
-                </DialogTitle>
-                <DialogContent>
-                  <TextField
-                    value={name}
-                    label="Ввести категорию"
-                    placeholder="Ввести категорию"
-                    type="text"
-                    onChange={handleEditNameCategory}
-                  />
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClose} color="primary">
-                    Cancel
-                  </Button>
-                  <Button
-                    onClick={() => handleClose(category._id)}
-                    color="primary"
-                  >
-                    Save
-                  </Button>
-                </DialogActions>
-              </Dialog>
             </TableCell>
             <TableCell>Удалить</TableCell>
           </TableRow>
         );
       })}
+      <EditCategoryDialog setOpen={setOpen} open={open} />
     </>
   );
 }

@@ -8,3 +8,5 @@ router.get('/cart', cartController.getCart);
 router.post('/addCart', cartController.addCart);
 router.post('/addInCart', cartController.addProductInCart);
 router.delete('/productFromCart/:id', cartController.deleteProductFromCart);
+
+module.exports = router;

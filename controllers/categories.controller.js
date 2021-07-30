@@ -59,7 +59,7 @@ module.exports.categoriesController = {
 
     try {
       const category = await Category.findByIdAndUpdate(
-        id,
+        { _id: id },
         { name },
         { new: true }
       );
