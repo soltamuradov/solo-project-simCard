@@ -9,6 +9,10 @@ module.exports.cartController = {
         populate: {
           path: 'product',
           model: 'Product',
+          populate: {
+            path: 'categoryId',
+            model: 'Category',
+          },
         },
       });
       return res.json(cart);
@@ -18,7 +22,6 @@ module.exports.cartController = {
       });
     }
   },
-
   addCart: async (req, res) => {
     const { productItems } = req.body;
 

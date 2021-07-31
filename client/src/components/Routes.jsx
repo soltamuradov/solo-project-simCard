@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import AdminPanelNumbers from './pages/AdminPanelNumbers';
 import AdminPanelCategories from './pages/AdminPanelCategories';
-import Cart from './header/Cart';
+import Cart from './pages/Cart';
 
 function Routes() {
   return (

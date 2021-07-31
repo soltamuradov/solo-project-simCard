@@ -1,15 +1,8 @@
-import React from 'react';
-import {
-  Button,
-  makeStyles,
-  Table,
-  TableCell,
-  TableContainer,
-  TableRow,
-} from '@material-ui/core';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { Button, makeStyles, TableCell, TableRow } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
 import SubMenu from '../SubMenu';
-import Cart from '../header/Cart';
+import { productBuy } from '../../redux/features/products';
 
 const useStyles = makeStyles({
   numberString: {},
@@ -18,6 +11,14 @@ const useStyles = makeStyles({
 function Home() {
   const classes = useStyles();
   const products = useSelector((state) => state.products.items);
+  const cart = useSelector((state) => state.cart.items);
+  const dispatch = useDispatch();
+  const handleBuy = (productId) => {
+    const cartId = cart.map((item) => {
+      return item._id;
+    });
+    dispatch(productBuy(productId, cartId));
+  };
   return (
     <>
       <SubMenu />
@@ -30,7 +31,12 @@ function Home() {
             <TableCell>{`${product.price} руб.`}</TableCell>
             <TableCell>{product.categoryId.name}</TableCell>
             <TableCell>
-              <Button variant="contained">Купить</Button>
+              <Button
+                onClick={() => handleBuy(product._id)}
+                variant="contained"
+              >
+                Купить
+              </Button>
             </TableCell>
           </TableRow>
         );

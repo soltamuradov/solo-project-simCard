@@ -108,6 +108,26 @@ export const addProduct = (data) => {
   };
 };
 
+export const productBuy = (productId, cartId) => {
+  console.log(cartId);
+  return async (dispatch) => {
+    dispatch({ type: 'product/Buy/pending' });
+    try {
+      const res = await fetch(`http://localhost:3003/addInCart/${cartId}`, {
+        method: 'POST',
+        body: JSON.stringify({ product: productId }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      });
+      const json = await res.json();
+      dispatch({ type: 'product/Buy/fulfilled', payload: json });
+    } catch (e) {
+      console.log(e.message);
+    }
+  };
+};
+
 export const productsByCategory = (id) => {
   return async (dispatch) => {
     dispatch({ type: 'productByCategory/load/pending' });

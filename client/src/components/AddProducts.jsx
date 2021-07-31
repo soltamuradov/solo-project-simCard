@@ -7,7 +7,7 @@ import {
   TableRow,
   TextField,
 } from '@material-ui/core';
-import { addProduct, productsByCategory } from '../redux/features/products';
+import { addProduct } from '../redux/features/products';
 import { useDispatch, useSelector } from 'react-redux';
 
 function AddProducts() {
@@ -30,7 +30,7 @@ function AddProducts() {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleAddCategory = (id) => {
+  const handleСhooseCategory = (id) => {
     setCategory(id);
 
     handleClose();
@@ -86,7 +86,7 @@ function AddProducts() {
           aria-haspopup="true"
           onClick={handleClick}
         >
-          Тип номера
+          Выбрать
         </Button>
         <Menu
           id="simple-menu"
@@ -97,7 +97,7 @@ function AddProducts() {
         >
           {categories.map((category) => {
             return (
-              <MenuItem onClick={() => handleAddCategory(category._id)}>
+              <MenuItem onClick={() => handleСhooseCategory(category._id)}>
                 {category.name}
               </MenuItem>
             );

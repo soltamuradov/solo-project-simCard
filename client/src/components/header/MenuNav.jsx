@@ -10,7 +10,7 @@ import {
   Select,
 } from '@material-ui/core';
 import '../../styles.css';
-import Cart from './Cart';
+import Cart from '../pages/Cart';
 
 const useStyle = makeStyles({
   navBar: {

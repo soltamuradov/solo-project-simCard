@@ -2,7 +2,7 @@ import React from 'react';
 import Logo from './Logo';
 import { AppBar, Box, makeStyles } from '@material-ui/core';
 import Menu from './MenuNav';
-import Cart from './Cart';
+import Cart from '../pages/Cart';
 import SubMenu from '../SubMenu';
 import MenuNav from './MenuNav';
 

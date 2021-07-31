@@ -53,7 +53,11 @@ function AdminPanelCategories() {
                 Изменить
               </Button>
             </TableCell>
-            <TableCell>Удалить</TableCell>
+            <TableCell>
+              <Button variant="contained" color="secondary">
+                Удалить
+              </Button>
+            </TableCell>
           </TableRow>
         );
       })}

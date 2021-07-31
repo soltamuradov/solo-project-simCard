@@ -35,6 +35,7 @@ function AdminPanelNumbers() {
                 <Button
                   onClick={() => handleDeleteProduct(product._id)}
                   variant="contained"
+                  color="secondary"
                 >
                   Удалить
                 </Button>

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import { loadProducts } from '../redux/features/products';
 import Routes from './Routes';
 import { allCategories } from '../redux/features/categories';
+import { loadCart } from '../redux/features/cart';
 
 function App() {
   const dispatch = useDispatch();
@@ -12,6 +13,8 @@ function App() {
   useEffect(() => dispatch(loadProducts()), [dispatch]);
 
   useEffect(() => dispatch(allCategories()), [dispatch]);
+
+  useEffect(() => dispatch(loadCart()), [dispatch]);
 
   return (
     <>
