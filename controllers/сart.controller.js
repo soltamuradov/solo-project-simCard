@@ -53,13 +53,19 @@ module.exports.cartController = {
   },
 
   deleteProductFromCart: async (req, res) => {
-    const cart = await Cart.findById(req.params.id);
+    const { id } = req.params;
+    const { productId } = req.body;
+    const cart = await Cart.findById(id);
+
+    let productsItems = cart.productsItems;
     try {
-      cart.productItems.forEach((item, key) => {
-        if (String(item.id) === req.params.id) {
-          cart.productItems(key, 1);
+      productsItems.forEach((item, key) => {
+        if (String(item.product) === productId) {
+          console.log(key);
+          productsItems.splice(key, 1);
         }
       });
+
       cart.save();
       return res.json(cart);
     } catch (e) {
